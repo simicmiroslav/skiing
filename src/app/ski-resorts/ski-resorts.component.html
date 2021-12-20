@@ -1,0 +1,41 @@
+<div class="row">
+  <div class="col-sm-12">
+    <ski-resort-panel [skiResort]="skiResort"></ski-resort-panel>
+  </div>
+</div>
+
+<div class="row">
+  <ul ngbNav #nav="ngbNav" [(activeId)]="active" class="nav-tabs col">
+    <li [ngbNavItem]="1" class="col-4">
+      <a ngbNavLink>Tracks</a>
+      <ng-template ngbNavContent>
+        <ski-resort-tracks [tracks]="tracks" (changeSort)="updateTracks($event)"></ski-resort-tracks>
+      </ng-template>
+    </li>
+    <li [ngbNavItem]="2" class="col-4">
+      <a ngbNavLink>Weather</a>
+      <ng-template ngbNavContent>
+        <div class="row">
+          <div class="col-2" *ngFor="let w of weather">
+            <ski-weather [weather]="w"></ski-weather>
+          </div>
+
+        </div>
+      </ng-template>
+    </li>
+    <li [ngbNavItem]="3" class="col-4">
+      <a ngbNavLink>Ski pass</a>
+      <ng-template ngbNavContent>
+        <ski-skipass [skiPassPrice]="skiPassPrice" (newReservation)="newReservation($event)"></ski-skipass>
+      </ng-template>
+    </li>
+  </ul>
+
+</div>
+
+
+<div class="row">
+  <div class="col-sm-12">
+    <div [ngbNavOutlet]="nav" class="mt-2"></div>
+  </div>
+</div>
